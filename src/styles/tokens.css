@@ -66,4 +66,13 @@
   --bottle-h: min(76svh, 760px);
   --bottle-h-mobile: 50svh;
   --grain-opacity: 0.06;
+
+  /* Ritmo de capítulos (página compacta: 3 movimientos) */
+  --chapter-pad: var(--space-7);
+
+  /* Material documental: todo se disuelve en el negro, nada va en marco */
+  --feather: 22%;
+  --lens-solid: 58%;
+  --zoom-base: 1.02;
+  --zoom-range: 0.12;
 }

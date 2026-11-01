@@ -1,0 +1,165 @@
+/* Movimiento 2 — Trazabilidad: el lote descifrado y el material casero como documento. Solo tokens. */
+.trace-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--space-7);
+  align-items: center;
+}
+
+/* Columna de lectura: titular + lote descifrado, centrada frente a la foto */
+.trace-intro {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  display: grid;
+  gap: var(--space-6);
+}
+
+.trace-intro .chapter-head {
+  margin-bottom: 0;
+}
+
+.trace-photo {
+  grid-column: 8 / 13;
+  grid-row: 1;
+}
+
+.trace-oil {
+  grid-column: 2 / 6;
+  grid-row: 2;
+}
+
+.trace-quote {
+  grid-column: 8 / 13;
+  grid-row: 2;
+}
+
+/* Lote: el código impreso, separado en sus cuatro piezas */
+.lot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: var(--space-5) var(--space-4);
+  margin: 0;
+}
+
+.lot-part {
+  flex: 0 0 auto;
+  width: min-content;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.lot-code {
+  font-size: var(--step-3);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--hairline) solid var(--accent-primary);
+}
+
+.lot-part--initials .lot-code {
+  color: var(--accent-primary);
+}
+
+.lot-meaning {
+  margin: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.lot-value {
+  font-size: var(--step--1);
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+/* Fig. 01 — foto fija que se disuelve en el negro y se acerca despacio con el scroll */
+.trace-photo-frame {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  --fade-x: linear-gradient(to right, transparent, var(--surface) var(--feather), var(--surface) calc(100% - var(--feather)), transparent);
+  --fade-y: linear-gradient(to bottom, transparent, var(--surface) var(--feather), var(--surface) calc(100% - var(--feather)), transparent);
+  -webkit-mask-image: var(--fade-x), var(--fade-y);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--fade-x), var(--fade-y);
+  mask-composite: intersect;
+}
+
+.trace-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(calc(var(--zoom-base) + var(--zoom-range) * var(--p, 0)));
+  transform-origin: 50% 40%;
+}
+
+/* Fig. 02 — mirilla con el bucle del aceite */
+.trace-oil .ambient {
+  width: 100%;
+}
+
+.trace-quote {
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: var(--hairline) solid var(--accent-primary);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.trace-quote p {
+  max-width: 26ch;
+  font-size: var(--step-2);
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trace-photo-frame img {
+    transform: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .trace-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-6);
+  }
+
+  .trace-intro,
+  .trace-photo,
+  .trace-oil,
+  .trace-quote {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .trace-intro {
+    gap: var(--space-5);
+  }
+
+  .trace-oil {
+    width: 84%;
+    justify-self: center;
+  }
+
+  /* Móvil: quién (iniciales) en una línea y cuándo (14 · 10 · 26) en la siguiente */
+  .lot {
+    gap: var(--space-5) var(--space-4);
+  }
+
+  .lot-part--initials {
+    flex-basis: 100%;
+    width: auto;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+    column-gap: var(--space-4);
+  }
+
+  .lot-part--initials .lot-meaning {
+    padding-bottom: var(--space-3);
+  }
+}

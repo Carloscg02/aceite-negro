@@ -1,10 +1,9 @@
 import { CONTACT, SALE_FORMATS } from './config/site';
+import { LOT_CODE, PRODUCER } from './config/label';
 import { BottleChapter } from './sections/BottleChapter';
-import { FieldChapter } from './sections/FieldChapter';
-import { MillChapter } from './sections/MillChapter';
 import { PurchaseSection } from './sections/PurchaseSection';
 import { SiteFooter, SiteHeader } from './sections/SiteChrome';
-import { SpecSheetChapter } from './sections/SpecSheetChapter';
+import { TraceabilityChapter } from './sections/TraceabilityChapter';
 
 export function App() {
   return (
@@ -15,9 +14,7 @@ export function App() {
       <SiteHeader />
       <main>
         <BottleChapter />
-        <FieldChapter />
-        <MillChapter />
-        <SpecSheetChapter />
+        <TraceabilityChapter lotCode={LOT_CODE} producer={PRODUCER.person} />
         <PurchaseSection formats={SALE_FORMATS} contact={CONTACT} />
       </main>
       <SiteFooter contact={CONTACT} />

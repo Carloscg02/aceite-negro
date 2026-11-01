@@ -1,13 +1,20 @@
+/* Mirilla: el vídeo se disuelve en el negro por los bordes (eco del foco de la botella).
+   La máscara va en el vídeo y el grano, no en el contenedor, para no recortar el botón. */
 .ambient {
   position: relative;
-  overflow: hidden;
-  background: var(--surface-elevated);
+  aspect-ratio: 1;
 }
 
 .ambient-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.ambient-video,
+.ambient-grain {
+  -webkit-mask-image: radial-gradient(closest-side, var(--surface) var(--lens-solid), transparent 100%);
+  mask-image: radial-gradient(closest-side, var(--surface) var(--lens-solid), transparent 100%);
 }
 
 .ambient-toggle {

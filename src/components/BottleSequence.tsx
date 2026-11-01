@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { frameIndexForProgress, lerp } from '../lib/scrub';
+import { frameForProgress, frameIndexForProgress, lerp, type FrameStop } from '../lib/scrub';
 import { frameUrl, nearestAvailable } from '../lib/frames';
 import { useFrameLoader, type LoadStatus } from '../hooks/useFrameLoader';
 import { useReducedMotion } from '../hooks/useReducedMotion';
@@ -15,6 +15,8 @@ export interface BottleSequenceProps {
   stillSrc: string;
   /** Progreso 0..1 del capítulo; se lee en cada frame de animación (sin re-render). */
   progressRef: { current: number };
+  /** Paradas del giro; sin ellas el progreso se reparte linealmente entre todos los fotogramas. */
+  stops?: readonly FrameStop[];
   /** Notifica el fotograma pintado (HUD de rotación). */
   onFrame?: (frame: number) => void;
   /** Forzar estado (tests / depuración). */
@@ -28,7 +30,7 @@ const SMOOTHING = 0.22;
 const NAME = 'Botella de Aceite Negro Picudo';
 
 export function BottleSequence(props: BottleSequenceProps) {
-  const { frameCount, template, width, height, stillSrc, progressRef, onFrame } = props;
+  const { frameCount, template, width, height, stillSrc, progressRef, stops, onFrame } = props;
   const prefersReduced = useReducedMotion();
   const reduced = props.reducedMotion ?? prefersReduced;
   const loader = useFrameLoader(template, frameCount, !reduced && props.status === undefined);
@@ -49,13 +51,14 @@ export function BottleSequence(props: BottleSequenceProps) {
 
     const images = loader.images.current;
     const loaded = loader.loaded.current;
-    let current = frameIndexForProgress(progressRef.current, frameCount);
+    const targetFor = (p: number) => (stops ? frameForProgress(p, stops) : frameIndexForProgress(p, frameCount));
+    let current = targetFor(progressRef.current);
     let drawnImage = -1;
     let shownFrame = -1;
     let raf = 0;
 
     const tick = () => {
-      const target = frameIndexForProgress(progressRef.current, frameCount);
+      const target = targetFor(progressRef.current);
       current = Math.abs(target - current) < 0.05 ? target : lerp(current, target, SMOOTHING);
       const frame = Math.round(current);
       const available = nearestAvailable(loaded, frame);
@@ -91,7 +94,7 @@ export function BottleSequence(props: BottleSequenceProps) {
       io.disconnect();
       stop();
     };
-  }, [view, frameCount, width, height, progressRef, loader.images, loader.loaded]);
+  }, [view, frameCount, width, height, progressRef, stops, loader.images, loader.loaded]);
 
   return (
     <figure className="bottle" data-status={view}>

@@ -141,7 +141,7 @@ export function PurchaseSection({ formats, contact }: Props) {
       <div className="container">
         <header className="chapter-head purchase-head">
           <p className="eyebrow">
-            <b>05</b> — Comprar
+            <b>03</b> — Comprar
           </p>
           <h2 id="comprar-title" className="display">
             Por <em>cajas</em>.

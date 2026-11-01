@@ -101,12 +101,6 @@
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-.annotation-code {
-  font-size: var(--step-2);
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
-}
-
 .link-cta {
   justify-self: start;
   display: inline-flex;
@@ -167,6 +161,21 @@
   background: var(--accent-primary);
   transform-origin: top;
   transform: scaleY(0);
+}
+
+/* Marcas de las paradas del giro sobre la pista */
+.hud-tick {
+  position: absolute;
+  right: 0;
+  top: calc(var(--at) * 100%);
+  width: var(--space-2);
+  height: var(--hairline);
+  background: var(--border-subtle);
+  transition: background-color var(--dur-slow) var(--ease);
+}
+
+.hud-tick[data-active='true'] {
+  background: var(--accent-oil);
 }
 
 .scroll-cue {

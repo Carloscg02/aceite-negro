@@ -86,6 +86,69 @@ export function activeAnnotation(
   return null;
 }
 
+/** Parada del giro: entre `from` y `to` (progreso 0..1) la botella se queda quieta en `frame`. */
+export interface FrameStop {
+  id: string;
+  from: number;
+  to: number;
+  frame: number;
+}
 
+/** Curva de suavizado cúbica: derivada nula en los extremos (arranca y se asienta sin golpe). */
+const smoothstep = (t: number) => t * t * (3 - 2 * t);
 
+/**
+ * Fotograma (fraccionario) para un progreso, recorriendo las paradas en orden:
+ * meseta en cada parada y tramo suavizado entre una y la siguiente.
+ * Fuera de [0, 1] clampa; ante entradas no finitas devuelve la primera parada; sin paradas, 0.
+ */
+export function frameForProgress(progress: number, stops: readonly FrameStop[]): number {
+  const first = stops[0];
+  if (!first) return 0;
+  if (!Number.isFinite(progress)) return first.frame;
+  const p = clamp(progress, 0, 1);
+  if (p <= first.to) return first.frame;
+  for (let i = 1; i < stops.length; i++) {
+    const prev = stops[i - 1]!;
+    const next = stops[i]!;
+    if (p < next.from) {
+      const t = clamp((p - prev.to) / (next.from - prev.to), 0, 1);
+      return lerp(prev.frame, next.frame, smoothstep(t));
+    }
+    if (p <= next.to) return next.frame;
+  }
+  return stops[stops.length - 1]!.frame;
+}
 
+/**
+ * Anotaciones que cubren [0, 1] sin huecos: cada una contiene la meseta de su parada
+ * y el relevo ocurre a mitad de camino entre paradas (cuando la botella va más rápido).
+ */
+export function annotationsForStops(stops: readonly FrameStop[]): Annotation[] {
+  return stops.map((stop, i) => {
+    const prev = stops[i - 1];
+    const next = stops[i + 1];
+    return {
+      id: stop.id,
+      from: prev ? (prev.to + stop.from) / 2 : 0,
+      to: next ? (stop.to + next.from) / 2 : 1,
+    };
+  });
+}
+
+/**
+ * Progreso [0..1] de un elemento que atraviesa el viewport: 0 cuando su borde superior
+ * asoma por abajo, 1 cuando su borde inferior sale por arriba. Nunca NaN.
+ */
+export function passThroughProgress(rectTop: number, height: number, viewportHeight: number): number {
+  if (!Number.isFinite(rectTop) || !Number.isFinite(height) || !Number.isFinite(viewportHeight)) return 0;
+  const run = viewportHeight + height;
+  if (run <= 0) return 0;
+  return clamp((viewportHeight - rectTop) / run, 0, 1);
+}
+
+/** Grados de giro (redondeados) que representa un fotograma de la secuencia 360°. */
+export function rotationDegrees(frame: number, frameCount: number): number {
+  if (!Number.isFinite(frame) || !Number.isFinite(frameCount) || frameCount <= 0) return 0;
+  return Math.round((frame / frameCount) * 360);
+}

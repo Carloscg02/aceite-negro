@@ -91,12 +91,154 @@
 }
 
 .footer-base {
-  margin-top: var(--space-7);
+  margin-top: var(--space-6);
   padding-top: var(--space-4);
-  border-top: var(--hairline) solid var(--border-subtle);
   font-size: var(--mono-size);
   letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Ficha completa: plegada en el pie, se abre desde «Ficha» o desde la contraetiqueta */
+.ficha {
+  margin-top: var(--space-6);
+  border-top: var(--hairline) solid var(--border-subtle);
+  border-bottom: var(--hairline) solid var(--border-subtle);
+}
+
+.ficha-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--control-h);
+  padding: var(--space-3) 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ficha-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ficha-summary .eyebrow {
+  color: var(--text-primary);
+}
+
+.ficha-summary-text {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  transition: color var(--dur-base) var(--ease);
+}
+
+.ficha-summary:hover .ficha-summary-text {
+  color: var(--text-primary);
+}
+
+/* Signo + que pasa a − al abrir */
+.ficha-toggle {
+  position: relative;
+  flex: none;
+  width: var(--space-3);
+  height: var(--space-3);
+  margin-left: auto;
+}
+
+.ficha-toggle::before,
+.ficha-toggle::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: var(--hairline);
+  background: var(--accent-oil);
+}
+
+.ficha-toggle::after {
+  transform: rotate(90deg);
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.ficha[open] .ficha-toggle::after {
+  transform: none;
+}
+
+.ficha-body {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--space-5);
+  padding: var(--space-3) 0 var(--space-6);
+}
+
+.ficha-label {
+  grid-column: 1 / 7;
+  margin: 0;
+}
+
+.ficha-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: var(--hairline) solid var(--border-subtle);
+  font-size: var(--step--1);
+}
+
+.ficha-row dd {
+  margin: 0;
+}
+
+.ficha-nutrition {
+  grid-column: 8 / 13;
+}
+
+.ficha-nutrition table {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--hairline) solid var(--text-muted);
+}
+
+/* El caption se queda como table-caption (con flex perdería su caja y se colaría en la 1.ª columna);
+   el reparto título | «por 100 g» lo hace un envoltorio interior. */
+.ficha-nutrition caption {
+  padding: var(--space-2) var(--space-3);
+  border: var(--hairline) solid var(--text-muted);
+  border-bottom: 0;
+  text-align: left;
+}
+
+.ficha-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+}
+
+.ficha-caption .eyebrow:first-child {
+  color: var(--text-primary);
+}
+
+.ficha-nutrition th,
+.ficha-nutrition td {
+  padding: var(--space-2) var(--space-3);
+  border-top: var(--hairline) solid var(--border-subtle);
+  font-size: var(--step--1);
+  font-weight: 300;
+  text-align: left;
+}
+
+/* Los valores solo parten línea en sus separadores («/», paréntesis): número y unidad van con NBSP. */
+.ficha-nutrition td {
+  text-align: right;
+}
+
+.ficha-nutrition tr.is-sub th {
+  padding-left: var(--space-5);
+  color: var(--text-muted);
+}
+
+.ficha-note {
+  margin-top: var(--space-2);
+  font-size: var(--mono-size);
   color: var(--text-muted);
 }
 
@@ -106,7 +248,32 @@
   }
 
   .footer-grid,
-  .footer-legal {
+  .footer-legal,
+  .ficha-body {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ficha-label,
+  .ficha-nutrition {
+    grid-column: 1;
+  }
+
+  .ficha-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  .ficha-summary-text {
+    display: none;
+  }
+
+  /* Tabla nutricional en móvil: menos sangrado para que quepa en 320 px sin desbordar la página. */
+  .ficha-nutrition th,
+  .ficha-nutrition td {
+    padding-inline: var(--space-2);
+  }
+
+  .ficha-nutrition tr.is-sub th {
+    padding-left: var(--space-4);
   }
 }
