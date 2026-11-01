@@ -1,0 +1,139 @@
+/* Capítulo Ficha: superficie papel, eco de la tabla nutricional. Solo tokens. */
+.sheet {
+  background: var(--surface-paper);
+  color: var(--ink);
+}
+
+.sheet .eyebrow {
+  color: var(--ink-muted);
+}
+
+.sheet .eyebrow b,
+.sheet .display em {
+  color: var(--accent-primary);
+}
+
+.sheet ::selection {
+  background: var(--ink);
+  color: var(--surface-paper);
+}
+
+.sheet-figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+  margin: 0;
+}
+
+.sheet-figure {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.sheet-figure dd {
+  margin: 0;
+  font-size: var(--step-3);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.sheet-rule {
+  margin-block: var(--space-6);
+  border-color: var(--ink);
+  opacity: 0.5;
+}
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--space-6);
+  align-items: start;
+}
+
+.sheet-label {
+  grid-column: 1 / 7;
+  margin: 0;
+}
+
+.sheet-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: var(--hairline) solid var(--border-paper);
+}
+
+.sheet-row dd {
+  margin: 0;
+}
+
+.sheet-nutrition {
+  grid-column: 8 / 13;
+}
+
+.sheet-nutrition table {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--hairline) solid var(--ink);
+}
+
+.sheet-nutrition caption {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-3);
+  border: var(--hairline) solid var(--ink);
+  border-bottom: 0;
+  text-align: left;
+}
+
+.sheet-nutrition caption .eyebrow:first-child {
+  color: var(--ink);
+}
+
+.sheet-nutrition th,
+.sheet-nutrition td {
+  padding: var(--space-2) var(--space-3);
+  border-top: var(--hairline) solid var(--border-paper);
+  font-size: var(--step--1);
+  text-align: left;
+  font-weight: 400;
+}
+
+.sheet-nutrition td {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.sheet-nutrition tr.is-sub th {
+  padding-left: var(--space-5);
+  color: var(--ink-muted);
+}
+
+.sheet-note {
+  margin-top: var(--space-2);
+  font-size: var(--mono-size);
+  color: var(--ink-muted);
+}
+
+@media (max-width: 860px) {
+  .sheet-figures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-5);
+  }
+
+  .sheet-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sheet-label,
+  .sheet-nutrition {
+    grid-column: 1;
+  }
+
+  .sheet-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+}

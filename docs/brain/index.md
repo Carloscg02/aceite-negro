@@ -15,9 +15,11 @@
 ## 2. Documentos Centrales (Nivel 2)
 - **[`architecture.md`](architecture.md)** - Diseno de capas, reglas de codigo y comandos de verificacion.
 - **[`handoff.md`](handoff.md)** - Estado del turno actual y siguiente paso inmediato (maximo 30 lineas).
+- **[`design.md`](design.md)** - Contrato UI «Almazara Nocturna»: tokens, tipografia, reglas Anti-Slop y estados obligatorios. Leer antes de tocar interfaz.
 - **[`decisions/index.md`](decisions/index.md)** - Sub-indice de decisiones tecnicas irreversibles (ADRs). Consultar solo ante decisiones arquitectonicas.
 
 ---
 
 ## 3. Modulos del Sistema (`modules/`)
 Registro de fichas tecnicas de cada modulo implementado en el proyecto.
+- **[`modules/landing-scrollcraft.md`](modules/landing-scrollcraft.md)** - Landing ScrollCraft «Almazara Nocturna»: scrub 360° de botella, cuaderno documental de campo/almazara, ficha tecnica de etiqueta y compra por cajas (Stripe / WhatsApp).
