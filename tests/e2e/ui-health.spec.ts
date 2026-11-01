@@ -38,9 +38,10 @@ test.describe('Agent Eyes — UI Health & ScrollCraft (Puerto 5174)', () => {
     const snapshot = await page.locator('body').ariaSnapshot();
     expect(snapshot).toContain('heading "Aceite Negro Picudo" [level=1]');
     expect(snapshot).toContain('heading "La aceituna picuda." [level=2]');
-    expect(snapshot).toContain('heading "Por cajas." [level=2]');
-    expect(snapshot).toContain('Caja de 6');
-    expect(snapshot).toContain('Caja de 12');
+    expect(snapshot).toContain('heading "En origen, por botellas." [level=2]');
+    expect(snapshot).toContain('Botella de cristal');
+    expect(snapshot).toContain('Botella de PET');
+    expect(snapshot).toContain('Encargar por WhatsApp');
 
     await expect(page.locator('#botella h1')).toHaveCount(1);
     await expect(page.locator('h1')).toHaveCount(1);

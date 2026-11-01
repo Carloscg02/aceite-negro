@@ -3,97 +3,89 @@ import { render, screen, within } from '@testing-library/react';
 import { PurchaseSection } from './PurchaseSection';
 import type { SaleFormat } from '../domain/catalog';
 
-const CONTACT = { whatsapp: '+34 611 22 33 44', email: 'pedidos@example.es' };
+const CONTACT = { whatsapp: '+34 670 94 14 88' };
 
-const caja = (over: Partial<SaleFormat> = {}): SaleFormat => ({
-  id: 'caja-6',
-  name: 'Caja de 6',
-  bottles: 6,
+const cristal = (over: Partial<SaleFormat> = {}): SaleFormat => ({
+  id: 'botella-cristal',
+  name: 'Botella de cristal',
+  bottles: 1,
   bottleMl: 500,
-  unitPriceCents: 1000,
-  paymentLink: 'https://buy.stripe.com/test_caja6',
+  unitPriceCents: 1300,
+  paymentLink: null,
   availability: 'available',
   ...over,
 });
 
-const caja12 = (over: Partial<SaleFormat> = {}): SaleFormat =>
-  caja({ id: 'caja-12', name: 'Caja de 12', bottles: 12, paymentLink: 'https://buy.stripe.com/test_caja12', ...over });
+const pet = (over: Partial<SaleFormat> = {}): SaleFormat => ({
+  id: 'botella-pet',
+  name: 'Botella de PET',
+  bottles: 1,
+  bottleMl: 500,
+  unitPriceCents: 1000,
+  paymentLink: null,
+  availability: 'available',
+  ...over,
+});
 
 // Testing Library normaliza los espacios (incl. U+00A0) del DOM; el NBSP se verifica en catalog.test.ts.
 describe('<PurchaseSection>', () => {
-  it('populated: lista cada formato con litros, precio total y enlace de pago Stripe', () => {
-    render(<PurchaseSection formats={[caja(), caja12()]} contact={CONTACT} />);
+  it('populated: muestra los dos formatos (cristal 13 € y PET 10 €) de 500 ml y el encargo único por WhatsApp', () => {
+    render(<PurchaseSection formats={[cristal(), pet()]} contact={CONTACT} />);
 
-    expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: /en origen, por botellas/i })).toBeInTheDocument();
     const rows = screen.getAllByRole('listitem');
     expect(rows).toHaveLength(2);
 
     const first = within(rows[0]!);
-    expect(first.getByText('Caja de 6')).toBeInTheDocument();
-    expect(first.getByText('6 × 500 ml · 3 L')).toBeInTheDocument();
-    expect(first.getByText('60 €')).toBeInTheDocument();
-    expect(first.getByRole('link', { name: /comprar caja de 6/i })).toHaveAttribute(
-      'href',
-      'https://buy.stripe.com/test_caja6',
-    );
+    expect(first.getByText('Botella de cristal')).toBeInTheDocument();
+    expect(first.getByText('500 ml')).toBeInTheDocument();
+    expect(first.getByText('13 €')).toBeInTheDocument();
 
     const second = within(rows[1]!);
-    expect(second.getByText('12 × 500 ml · 6 L')).toBeInTheDocument();
-    expect(second.getByText('120 €')).toBeInTheDocument();
+    expect(second.getByText('Botella de PET')).toBeInTheDocument();
+    expect(second.getByText('500 ml')).toBeInTheDocument();
+    expect(second.getByText('10 €')).toBeInTheDocument();
   });
 
-  it('muestra el precio unitario por botella', () => {
-    render(<PurchaseSection formats={[caja()]} contact={CONTACT} />);
-    expect(screen.getByText('10 € / botella')).toBeInTheDocument();
+  it('incluye botón con logo SVG de WhatsApp hacia +34 670 94 14 88 y aviso explícito de no llamadas ni correo', () => {
+    render(<PurchaseSection formats={[cristal(), pet()]} contact={CONTACT} />);
+
+    const cta = screen.getByRole('link', { name: /encargar por whatsapp/i });
+    expect(cta.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/34670941488\?text=/);
+    expect(cta).toHaveAttribute('target', '_blank');
+    expect(cta).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(cta.querySelector('svg')).not.toBeNull();
+
+    expect(screen.getByText(/\+34 670 94 14 88/)).toBeInTheDocument();
+    expect(screen.getByText(/únicamente por mensaje de whatsapp./i)).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /correo|email/i })).not.toBeInTheDocument();
   });
 
-  it('sold_out: el formato agotado no ofrece enlace de compra y se anuncia como agotado', () => {
-    render(<PurchaseSection formats={[caja({ availability: 'sold_out' }), caja12()]} contact={CONTACT} />);
+  it('sold_out: marca un formato agotado sin ocultar el resto', () => {
+    render(<PurchaseSection formats={[cristal({ availability: 'sold_out' }), pet()]} contact={CONTACT} />);
 
     const [agotada, disponible] = screen.getAllByRole('listitem');
-    const a = within(agotada!);
-    expect(a.queryByRole('link', { name: /comprar/i })).not.toBeInTheDocument();
-    expect(a.getByRole('button', { name: /caja de 6 agotada/i })).toBeDisabled();
-    expect(within(disponible!).getByRole('link', { name: /comprar caja de 12/i })).toBeInTheDocument();
+    expect(agotada).toHaveAttribute('data-state', 'sold_out');
+    expect(within(agotada!).getByText(/agotada/i)).toBeInTheDocument();
+    expect(disponible).toHaveAttribute('data-state', 'available');
   });
 
-  it('unconfigured: sin enlace Stripe válido deriva a pedido por WhatsApp prellenado', () => {
-    render(<PurchaseSection formats={[caja({ paymentLink: null })]} contact={CONTACT} />);
-
-    const row = within(screen.getByRole('listitem'));
-    const link = row.getByRole('link', { name: /pedir caja de 6 por whatsapp/i });
-    expect(link.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/34611223344\?text=/);
-    expect(decodeURIComponent(link.getAttribute('href')!)).toContain('caja de 6');
-  });
-
-  it('all_sold_out: sin formatos comprables muestra aviso y contacto directo', () => {
+  it('all_sold_out: cuando todos los formatos están agotados muestra aviso de estado', () => {
     render(
       <PurchaseSection
-        formats={[caja({ availability: 'sold_out' }), caja12({ availability: 'sold_out' })]}
+        formats={[cristal({ availability: 'sold_out' }), pet({ availability: 'sold_out' })]}
         contact={CONTACT}
       />,
     );
 
-    expect(screen.getByRole('status')).toHaveTextContent(/no quedan cajas disponibles en la web/i);
-    expect(screen.queryByRole('link', { name: /comprar/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent(/cosecha agotada|no quedan botellas disponibles/i);
   });
 
-  it('empty: sin formatos publicados muestra aviso y contacto directo', () => {
+  it('empty: sin formatos publicados muestra aviso de estado y mantiene el contacto por WhatsApp', () => {
     render(<PurchaseSection formats={[]} contact={CONTACT} />);
 
     expect(screen.queryAllByRole('listitem')).toHaveLength(0);
-    expect(screen.getByRole('status')).toHaveTextContent(/formatos de venta online/i);
-  });
-
-  it('siempre ofrece contacto directo por WhatsApp y email para particulares y profesionales', () => {
-    render(<PurchaseSection formats={[caja()]} contact={CONTACT} />);
-
-    const contacto = screen.getByRole('region', { name: /pedidos directos/i });
-    const whatsapps = within(contacto).getAllByRole('link', { name: /whatsapp/i });
-    const emails = within(contacto).getAllByRole('link', { name: /email|correo/i });
-    expect(whatsapps.length).toBeGreaterThanOrEqual(1);
-    expect(emails.length).toBeGreaterThanOrEqual(1);
-    expect(emails[0]).toHaveAttribute('href', expect.stringMatching(/^mailto:pedidos@example\.es\?subject=/));
-    expect(within(contacto).getByText(/tiendas|restaurantes|profesionales/i)).toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent(/consulta disponibilidad directamente por whatsapp/i);
+    expect(screen.getByRole('link', { name: /encargar por whatsapp/i })).toBeInTheDocument();
   });
 });

@@ -1,31 +1,31 @@
 import type { SaleFormat } from '../domain/catalog';
 
-export const UNIT_PRICE_CENTS = 1000; // 10 € por botella de 500 ml (provisional)
+export const GLASS_PRICE_CENTS = 1300; // 13 € botella de cristal (500 ml)
+export const PET_PRICE_CENTS = 1000; // 10 € botella de PET (500 ml)
 
 const env = import.meta.env;
 
 export const SALE_FORMATS: SaleFormat[] = [
   {
-    id: 'caja-6',
-    name: 'Caja de 6',
-    bottles: 6,
+    id: 'botella-cristal',
+    name: 'Botella de cristal',
+    bottles: 1,
     bottleMl: 500,
-    unitPriceCents: UNIT_PRICE_CENTS,
-    paymentLink: env.VITE_STRIPE_LINK_CAJA_6 ?? null,
+    unitPriceCents: GLASS_PRICE_CENTS,
+    paymentLink: env.VITE_STRIPE_LINK_CRISTAL ?? null,
     availability: 'available',
   },
   {
-    id: 'caja-12',
-    name: 'Caja de 12',
-    bottles: 12,
+    id: 'botella-pet',
+    name: 'Botella de PET',
+    bottles: 1,
     bottleMl: 500,
-    unitPriceCents: UNIT_PRICE_CENTS,
-    paymentLink: env.VITE_STRIPE_LINK_CAJA_12 ?? null,
+    unitPriceCents: PET_PRICE_CENTS,
+    paymentLink: env.VITE_STRIPE_LINK_PET ?? null,
     availability: 'available',
   },
 ];
 
 export const CONTACT = {
-  whatsapp: '+34 600 000 000',
-  email: 'pedidos@aceitenegropicudo.es',
-}; // placeholders
+  whatsapp: '+34 670 94 14 88',
+};

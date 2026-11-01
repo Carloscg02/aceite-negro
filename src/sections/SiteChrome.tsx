@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { LABEL_ROWS, LOT_CODE, NUTRITION, PRODUCER } from '../config/label';
-import { buildMailtoUrl } from '../domain/contact';
+import { buildWhatsAppUrl } from '../domain/contact';
 import type { Contact } from './PurchaseSection';
 import './SiteChrome.css';
 
@@ -130,10 +130,20 @@ export function SiteFooter({ contact }: { contact: Contact }) {
               <dd>Producto de España</dd>
             </div>
             <div>
-              <dt className="eyebrow">Contacto</dt>
-              <dd>
-                <a href={buildMailtoUrl(contact.email, 'Aceite Negro Picudo')}>{contact.email}</a>
+              <dt className="eyebrow">Contacto (WhatsApp)</dt>
+              <dd className="mono">
+                <a
+                  href={buildWhatsAppUrl(
+                    contact.whatsapp,
+                    'Hola, quería encargar Aceite Negro Picudo.',
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {contact.whatsapp}
+                </a>
               </dd>
+              <dd>Solo mensajes · No se atienden llamadas</dd>
             </div>
           </dl>
         </div>

@@ -4,7 +4,7 @@
 Landing D2C estática («Almazara Nocturna» v2) para el lote único de **Aceite Negro Picudo**: 3.000 botellas × 500 ml = 1.500 L, variedades Picudo y Carrasqueño, cosecha temprana de octubre de 2026. La página se recorre en 3 movimientos:
 1. Botella 360° guiada por el scroll, con 4 paradas anotadas.
 2. Trazabilidad: el lote descifrado y el material casero tratado como documento.
-3. Compra por cajas con Stripe Payment Links o contacto directo.
+3. Compra presencial en Jaén por botellas de 500 ml (cristal 13 € / PET 10 €) con encargo directo vía WhatsApp (`+34 670 94 14 88`, solo mensajes).
 
 La ficha completa de la etiqueta va plegada en el pie.
 

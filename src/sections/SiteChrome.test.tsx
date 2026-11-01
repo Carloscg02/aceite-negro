@@ -3,7 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SiteFooter, SiteHeader } from './SiteChrome';
 
-const CONTACT = { whatsapp: '+34 611 22 33 44', email: 'pedidos@example.es' };
+const CONTACT = { whatsapp: '+34 670 94 14 88' };
 
 const fichaOf = () => screen.getByText(/ficha completa/i).closest('details');
 
@@ -18,7 +18,7 @@ describe('<SiteHeader>', () => {
 });
 
 describe('<SiteFooter>', () => {
-  it('muestra a la vista, fuera de la ficha plegada, los datos legales de la etiqueta', () => {
+  it('muestra a la vista, fuera de la ficha plegada, los datos legales de la etiqueta y el contacto por WhatsApp', () => {
     render(<SiteFooter contact={CONTACT} />);
     const footer = screen.getByRole('contentinfo');
     const ficha = fichaOf()!;
@@ -28,10 +28,11 @@ describe('<SiteFooter>', () => {
     expect(visible('JCCC141026')).toHaveLength(1);
     expect(visible('Juan Carlos Cano Carrillo y otro C.B')).toHaveLength(1);
     expect(visible('E23312572')).toHaveLength(1);
-    expect(within(footer).getByRole('link', { name: CONTACT.email })).toHaveAttribute(
-      'href',
-      expect.stringMatching(/^mailto:pedidos@example\.es/),
-    );
+    const waLink = within(footer).getByRole('link', { name: /\+34 670 94 14 88/i });
+    expect(waLink).toHaveAttribute('href', expect.stringMatching(/^https:\/\/wa\.me\/34670941488\?text=/));
+    expect(waLink).toHaveAttribute('target', '_blank');
+    expect(waLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(within(footer).getByText(/no se atienden llamadas/i)).toBeInTheDocument();
   });
 
   it('guarda la ficha completa plegada, con la tabla nutricional y los datos de etiqueta', () => {

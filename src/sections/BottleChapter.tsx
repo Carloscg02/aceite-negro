@@ -2,7 +2,7 @@ import { useCallback, useRef, useState, type CSSProperties } from 'react';
 import { BottleSequence } from '../components/BottleSequence';
 import { BOTTLE_ANNOTATIONS, BOTTLE_STOPS } from '../config/bottle';
 import frames from '../config/bottle-frames.json';
-import { SALE_FORMATS, UNIT_PRICE_CENTS } from '../config/site';
+import { GLASS_PRICE_CENTS, PET_PRICE_CENTS } from '../config/site';
 import { formatEuros } from '../domain/catalog';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { activeAnnotation, rotationDegrees } from '../lib/scrub';
@@ -15,8 +15,6 @@ const angleAt = (id: string) => {
   const stop = BOTTLE_STOPS.find((s) => s.id === id);
   return `${stop ? rotationDegrees(stop.frame, frames.frameCount) : 0}°`;
 };
-
-const BOXES = new Intl.ListFormat('es', { type: 'conjunction' }).format(SALE_FORMATS.map((f) => String(f.bottles)));
 
 export function BottleChapter() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -105,17 +103,11 @@ export function BottleChapter() {
               </p>
               <p className="display annotation-big annotation-big--huge mono-nums">500 ml</p>
               <p className="lede">
-                {SALE_FORMATS.length > 0 ? (
-                  <>
-                    En cajas de <strong>{BOXES}</strong> botellas, a{' '}
-                    <strong>{formatEuros(UNIT_PRICE_CENTS)}</strong> la botella.
-                  </>
-                ) : (
-                  'Venta por cajas, bajo encargo.'
-                )}
+                Botella de cristal (<strong>{formatEuros(GLASS_PRICE_CENTS)}</strong>) o PET (
+                <strong>{formatEuros(PET_PRICE_CENTS)}</strong>). Venta presencial en Jaén.
               </p>
               <a className="link-cta" href="#comprar">
-                Ver cajas <span className="arrow" aria-hidden="true">→</span>
+                Encargar <span className="arrow" aria-hidden="true">→</span>
               </a>
             </div>
           </div>

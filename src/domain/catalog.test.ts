@@ -161,24 +161,26 @@ describe('catalogState', () => {
 });
 
 describe('site SALE_FORMATS configuration', () => {
-  it('configures caja-6 to produce 3 L and 60 €', () => {
-    const format = SALE_FORMATS.find((f) => f.id === 'caja-6');
+  it('configures botella-cristal (500 ml) at 13 €', () => {
+    const format = SALE_FORMATS.find((f) => f.id === 'botella-cristal');
     expect(format).toBeDefined();
-    if (!format) throw new Error('caja-6 not found');
-    expect(totalLiters(format)).toBe(3);
-    expect(formatLiters(totalLiters(format))).toBe('3\u00a0L');
-    expect(totalPriceCents(format)).toBe(6000);
-    expect(formatEuros(totalPriceCents(format))).toBe('60\u00a0€');
+    if (!format) throw new Error('botella-cristal not found');
+    expect(format.bottles).toBe(1);
+    expect(format.bottleMl).toBe(500);
+    expect(totalLiters(format)).toBe(0.5);
+    expect(totalPriceCents(format)).toBe(1300);
+    expect(formatEuros(totalPriceCents(format))).toBe('13\u00a0€');
   });
 
-  it('configures caja-12 to produce 6 L and 120 €', () => {
-    const format = SALE_FORMATS.find((f) => f.id === 'caja-12');
+  it('configures botella-pet (500 ml) at 10 €', () => {
+    const format = SALE_FORMATS.find((f) => f.id === 'botella-pet');
     expect(format).toBeDefined();
-    if (!format) throw new Error('caja-12 not found');
-    expect(totalLiters(format)).toBe(6);
-    expect(formatLiters(totalLiters(format))).toBe('6\u00a0L');
-    expect(totalPriceCents(format)).toBe(12000);
-    expect(formatEuros(totalPriceCents(format))).toBe('120\u00a0€');
+    if (!format) throw new Error('botella-pet not found');
+    expect(format.bottles).toBe(1);
+    expect(format.bottleMl).toBe(500);
+    expect(totalLiters(format)).toBe(0.5);
+    expect(totalPriceCents(format)).toBe(1000);
+    expect(formatEuros(totalPriceCents(format))).toBe('10\u00a0€');
   });
 });
 
