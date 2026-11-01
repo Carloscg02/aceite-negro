@@ -20,7 +20,6 @@ export function BottleChapter() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLSpanElement | null>(null);
   const rotationRef = useRef<HTMLSpanElement | null>(null);
-  const frameRef = useRef<HTMLSpanElement | null>(null);
   const [active, setActive] = useState<string>('intro');
 
   const onProgress = useCallback((p: number) => {
@@ -32,7 +31,6 @@ export function BottleChapter() {
 
   const onFrame = useCallback((frame: number) => {
     if (rotationRef.current) rotationRef.current.textContent = `${pad(rotationDegrees(frame, frames.frameCount))}°`;
-    if (frameRef.current) frameRef.current.textContent = pad(frame + 1);
   }, []);
 
   const is = (id: string) => active === id;
@@ -117,12 +115,6 @@ export function BottleChapter() {
               <span className="hud-key">Rotación</span>
               <span ref={rotationRef} className="hud-val">
                 000°
-              </span>
-            </p>
-            <p>
-              <span className="hud-key">Fotograma</span>
-              <span className="hud-val">
-                <span ref={frameRef}>001</span> / {frames.frameCount}
               </span>
             </p>
             <p>
