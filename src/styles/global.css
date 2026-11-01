@@ -1,0 +1,291 @@
+/* Base global: reset, tipografía y primitivas compartidas. Solo tokens. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: var(--surface);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--page-max) + 2 * var(--page-margin));
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--mono-size);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow b {
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-variant-numeric: lining-nums;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.display em {
+  font-style: italic;
+  color: var(--accent-primary);
+}
+
+.lede {
+  max-width: var(--measure);
+  color: var(--text-muted);
+  font-size: var(--step-0);
+}
+
+.lede strong {
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Doble filete: único ornamento de la marca (eco de la etiqueta). */
+.double-rule {
+  height: calc(var(--hairline) * 4);
+  border-top: var(--hairline) solid var(--accent-primary);
+  border-bottom: var(--hairline) solid var(--accent-primary);
+  opacity: 0.7;
+}
+
+.chapter {
+  position: relative;
+  padding-block: var(--chapter-pad);
+}
+
+.chapter-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.chapter-head h2 {
+  font-size: var(--step-3);
+  max-width: 14ch;
+}
+
+/* Pie de figura documental: número y timecode real en la primera línea, descripción debajo. Mono. */
+.caption {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'n tc'
+    'text text';
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-3);
+  font-size: var(--mono-size);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.caption-n {
+  grid-area: n;
+  color: var(--accent-primary);
+}
+
+.caption-text {
+  grid-area: text;
+}
+
+.caption-tc {
+  grid-area: tc;
+  justify-self: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Botones píldora */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-h);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  border: var(--hairline) solid var(--text-primary);
+  background: var(--text-primary);
+  color: var(--surface);
+  font-family: var(--font-text);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease),
+    border-color var(--dur-base) var(--ease),
+    color var(--dur-base) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.btn:hover {
+  background: var(--accent-oil);
+  border-color: var(--accent-oil);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.btn--ghost:hover {
+  background: transparent;
+  color: var(--accent-oil);
+  border-color: var(--accent-oil);
+}
+
+.btn[aria-disabled='true'],
+.btn:disabled {
+  cursor: not-allowed;
+  background: transparent;
+  color: var(--danger-muted);
+  border-color: var(--border-subtle);
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease);
+}
+
+a:hover .arrow,
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Grano fotográfico para unificar metraje de móvil */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+/* Revelado al entrar en viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--space-3));
+  transition:
+    opacity var(--dur-reveal) var(--ease),
+    transform var(--dur-reveal) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 20;
+  padding: var(--space-2) var(--space-3);
+  background: var(--text-primary);
+  color: var(--surface);
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}

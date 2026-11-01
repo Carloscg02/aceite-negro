@@ -1,0 +1,78 @@
+/* Tokens de diseño — espejo literal de docs/brain/design.md (§2 y §3).
+   Ningún componente puede declarar colores o medidas fuera de este archivo. */
+:root {
+  /* Color */
+  --surface: #0d0e0a;
+  --surface-elevated: #15170f;
+  --surface-paper: #ece9df;
+  --ink: #16170f;
+  --ink-muted: #5c5b4c;
+  --text-primary: #edebe3;
+  --text-muted: #a19f8c;
+  --border-subtle: #2b2e1f;
+  --border-paper: #c9c4b2;
+  --accent-primary: #8a9157;
+  --accent-oil: #bcc46a;
+  --light-pool: #e7e3d6;
+  --danger-muted: #c08a6a;
+
+  /* Forma */
+  --radius-none: 0;
+  --radius-pill: 999px;
+  --hairline: 1px;
+  --focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-oil);
+
+  /* Tipografía */
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-text: 'Sora Variable', 'Sora', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.75rem, 3vw, 2.5rem);
+  --step-3: clamp(2.5rem, 6vw, 4.75rem);
+  --step-4: clamp(3.5rem, 11vw, 9.5rem);
+  --mono-size: 0.6875rem;
+  --tracking-caps: 0.12em;
+  --measure: 60ch;
+
+  /* Espaciado (base 8) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --space-7: 104px;
+  --space-8: 168px;
+
+  /* Rejilla */
+  --gutter: var(--space-4);
+  --page-margin: clamp(20px, 5vw, 72px);
+  --page-max: 1320px;
+  --header-h: 56px;
+  --control-h: 48px;
+  --footer-logo-w: 220px;
+
+  /* Movimiento */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 180ms;
+  --dur-slow: 220ms;
+  --dur-reveal: 600ms;
+
+  /* Escenario de la botella */
+  --bottle-chapter-h: 520svh;
+  --bottle-h: min(76svh, 760px);
+  --bottle-h-mobile: 50svh;
+  --grain-opacity: 0.06;
+
+  /* Ritmo de capítulos (página compacta: 3 movimientos) */
+  --chapter-pad: var(--space-7);
+
+  /* Material documental: todo se disuelve en el negro, nada va en marco */
+  --feather: 22%;
+  --lens-solid: 58%;
+  --zoom-base: 1.02;
+  --zoom-range: 0.12;
+}

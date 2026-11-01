@@ -10,6 +10,9 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
+.playwright-libs/
+.playwright-libs
+scratch-tmp/
 
 # Environment & OS
 .env
@@ -17,6 +20,7 @@ playwright/.cache/
 !.env.example
 .DS_Store
 Thumbs.db
+*:Zone.Identifier
 
 # Git Worktrees for parallel A/B agents
 .worktrees/
