@@ -5,7 +5,7 @@ import type { Contact } from './PurchaseSection';
 import './SiteChrome.css';
 
 const NAV = [
-  ['#trazabilidad', 'Trazabilidad'],
+  ['#variedad', 'Variedad'],
   ['#ficha', 'Ficha'],
 ] as const;
 

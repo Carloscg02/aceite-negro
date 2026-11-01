@@ -94,7 +94,13 @@
 }
 
 .annotation-big {
+  font-size: var(--step-2);
+  line-height: 1.15;
+}
+
+.annotation-big--huge {
   font-size: var(--step-3);
+  line-height: 1;
 }
 
 .mono-nums {

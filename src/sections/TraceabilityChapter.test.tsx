@@ -2,48 +2,30 @@ import { describe, expect, it } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import { TraceabilityChapter } from './TraceabilityChapter';
 
-const PRODUCER = 'Juan Carlos Cano Carrillo';
-
 describe('<TraceabilityChapter>', () => {
-  it('abre su propio capítulo con un h2', () => {
-    render(<TraceabilityChapter lotCode="JCCC141026" producer={PRODUCER} />);
-    expect(screen.getByRole('heading', { level: 2, name: 'El lote es la fecha.' })).toBeInTheDocument();
+  it('abre su propio capítulo con un h2 dedicado a la aceituna picuda', () => {
+    render(<TraceabilityChapter />);
+    expect(screen.getByRole('heading', { level: 2, name: /La aceituna picuda/i })).toBeInTheDocument();
   });
 
-  it('descifra el lote en iniciales del productor, día, mes y año', () => {
-    render(<TraceabilityChapter lotCode="JCCC141026" producer={PRODUCER} />);
-
-    const lot = screen.getByLabelText('Lectura del lote JCCC141026');
-    expect(within(lot).getAllByRole('term').map((t) => t.textContent)).toEqual(['JCCC', '14', '10', '26']);
-    expect(within(lot).getByText(PRODUCER)).toBeInTheDocument();
-    expect(within(lot).getByText('miércoles')).toBeInTheDocument();
-    expect(within(lot).getByText('octubre')).toBeInTheDocument();
-    expect(within(lot).getByText('2026')).toBeInTheDocument();
-  });
-
-  it('si el código no se puede leer, muestra el lote tal cual sin inventar la lectura', () => {
-    render(<TraceabilityChapter lotCode="L-0001" producer={PRODUCER} />);
-
-    expect(screen.queryAllByRole('term')).toHaveLength(0);
-    expect(screen.getByText('L-0001')).toBeInTheDocument();
-  });
-
-  it('documenta aceituna y aceite con dos figuras numeradas y con timecode real del original', () => {
-    render(<TraceabilityChapter lotCode="JCCC141026" producer={PRODUCER} />);
+  it('documenta aceituna picuda y aceite sin numerar figuras', () => {
+    render(<TraceabilityChapter />);
 
     const figures = screen.getAllByRole('figure');
     expect(figures).toHaveLength(2);
-    expect(within(figures[0]!).getByRole('img', { name: /aceituna/i })).toHaveAttribute('src', '/media/aceituna.jpg');
-    expect(figures[0]).toHaveTextContent(/Fig\. 01/);
-    expect(figures[0]).toHaveTextContent('00:00.3');
-    expect(figures[1]).toHaveTextContent(/Fig\. 02/);
-    expect(figures[1]).toHaveTextContent('00:15.45—00:16.95');
+    expect(within(figures[0]!).getByRole('img', { name: /aceituna picuda/i })).toHaveAttribute(
+      'src',
+      '/media/aceituna-picuda.jpg',
+    );
+    expect(figures[0]).not.toHaveTextContent(/Fig\./);
+    expect(figures[1]).not.toHaveTextContent(/Fig\./);
+    expect(figures[1]).toHaveTextContent(/Nuestro aceite en la almazara/);
   });
 
   it('el aceite es un bucle silencioso con póster, nombre accesible y botón de pausa', () => {
-    render(<TraceabilityChapter lotCode="JCCC141026" producer={PRODUCER} />);
+    render(<TraceabilityChapter />);
 
-    const video = screen.getByLabelText(/aceite.*cubeta/i) as HTMLVideoElement;
+    const video = screen.getByLabelText(/Nuestro aceite en la almazara/i) as HTMLVideoElement;
     expect(video.tagName).toBe('VIDEO');
     expect(video.muted).toBe(true);
     expect(video).toHaveAttribute('loop');
@@ -52,8 +34,9 @@ describe('<TraceabilityChapter>', () => {
     expect(screen.getByRole('button', { name: /pausar/i })).toBeInTheDocument();
   });
 
-  it('cita la definición literal de la etiqueta', () => {
-    render(<TraceabilityChapter lotCode="JCCC141026" producer={PRODUCER} />);
+  it('destaca la explotación familiar y cita la definición de la etiqueta', () => {
+    render(<TraceabilityChapter />);
+    expect(screen.getByText('Una pequeña explotación familiar')).toBeInTheDocument();
     expect(screen.getByText(/solo mediante procedimientos mecánicos/)).toBeInTheDocument();
   });
 });

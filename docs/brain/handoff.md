@@ -1,26 +1,21 @@
 # Handoff del Proyecto: `aceite-negro` (rama `claude-ui-v2`)
 
-- **Dónde estamos (2026-11-01)**: `claude-ui-v2` está en `origin` y es la **versión candidata**. Lo más probable es que Carlos se quede con ella y la mezcle en `main`. Parte de `claude-ui` (prototipo 001) e implementa la spec 002, con la auditoría `APPROVED`. `main` sigue limpia (harness, ADRs y recursos) hasta el merge, y `argon-ui` está descartada.
-- **Siguiente sesión (otra cuenta)**: retoques finales **directos, sin pasar por SDD**, por decisión de Carlos. Antes de mezclar en `main`, dejar en verde `npm test`, `npm run lint`, `npm run build` y `npx playwright test`, y respetar `docs/brain/design.md` (solo tokens, cero hex fuera de `tokens.css`, nada de material de móvil a pantalla completa ni en marco).
-- **Feedback que motivó la v2**: a Carlos le encanta el giro de la botella. Los vídeos de móvil a gran tamaño le parecían «cutres» y no encajaban, así que se quedaron solo la foto del montón de aceituna y el bucle del aceite, en formato pequeño.
-- **Cómo retomar**:
-  ```bash
-  git fetch origin && git switch claude-ui-v2   # o en worktree: git worktree add .worktrees/claude-ui-v2 claude-ui-v2
-  npm ci && npm run dev                         # → http://localhost:5174
-  npm test && npm run lint && npm run build && npx playwright test
-  ```
-  - Playwright necesita `npx playwright install chromium`. Si faltan librerías del sistema y no hay sudo, se extraen en `.playwright-libs/` (gitignorado), que `playwright.config.ts` usa si existe.
-- **La página, en 3 movimientos**:
-  1. Botella 360° con 4 paradas anotadas, en los fotogramas 0, 50, 83 y 119 (`src/config/bottle.ts`).
-  2. «El lote es la fecha»: el lote descifrado (`src/domain/lot.ts`), la foto de la aceituna y el bucle del aceite en mirilla (`TraceabilityChapter`).
-  3. Compra por cajas (`PurchaseSection`).
-  - La ficha completa va plegada en el pie (`SiteChrome`).
-  - Datos de etiqueta en `src/config/label.ts`; formatos, precio y contacto en `src/config/site.ts`.
-- **Medios**: versionados en `public/media/`. Se regeneran con `npm run media` o paso a paso con `node scripts/build-media.mjs <botella|aceite|aceituna|logo>`. El aceite usa estabilización propia (`scripts/lib/stabilize.mjs`) y la salida es reproducible (md5 estable).
-- **Pendiente de Carlos antes del merge**:
-  1. Confirmar la lectura del lote. Se asume que `JCCC` es Juan Carlos Cano Carrillo y `141026` el 14/10/2026. ¿Es la fecha de recogida, de molturación o de envasado? Todo el movimiento 2 depende de esto (`LOT_CODE` y `PRODUCER` en `label.ts`).
-  2. Enlaces de Stripe en `.env` (`VITE_STRIPE_LINK_CAJA_6` / `_12`). Sin ellos, los botones derivan a WhatsApp.
-  3. Teléfono y correo reales en `CONTACT` (`src/config/site.ts`); ahora son placeholders.
-  4. Opcional: nombres del equipo (como créditos) y datos de la finca (término, altitud, número de olivos).
-- **Menores**: los tokens `--surface-paper`, `--ink` y `--border-paper` siguen en reserva sin uso; las rutas `/home/carlos/...` de `PROMPT_UI_CLAUDE.md` son históricas (esta sesión trabajó en un clon sin worktrees, `~/aceite-negro/`).
-- **Bloqueos activos**: ninguno.
+- **Dónde estamos (2026-11-01)**: `claude-ui-v2` lista con la primera tanda de retoques de Carlos aprobada.
+  - **Apertura**: `Recogida temprana · Octubre 2026` (eliminadas cifras de litros/lotes en hero).
+  - **Botella**: paradas ajustadas a `Picudo 75% y Carrasqueño 25%` y `72 g de grasa monoinsaturada` (sin superposiciones ni subtítulos pequeños).
+  - **Capítulo 2 y Menú**: renombrado a **«Variedad»**; sección dedicada a **«La aceituna picuda»** con foto a 440px y texto natural sin artificios. Pie de vídeo: `Nuestro aceite en la almazara` centrado, y cabecera `UNA PEQUEÑA EXPLOTACIÓN FAMILIAR`.
+  - **Ficha técnica / Etiqueta**: **100% validada** por Carlos. Datos nutricionales y legales verificados frente a la etiqueta física de Juan Carlos Cano Carrillo (`E23312572`, `40.044510/J`, lote `JCCC141026`).
+  - **Salud del código**: 88 tests Vitest, ESLint, TypeScript, Vite build y 6 tests E2E Playwright en verde.
+
+- **Situación y Decisión Estratégica para la Sección de Venta (v1)**:
+  - **Propósito de la v1**: web orientada a **imagen de marca y venta de proximidad a conocidos / boca a boca**.
+  - **Sin Stripe en v1**: descartada la pasarela de pago online en esta fase inicial para simplificar el lanzamiento.
+  - **Canal de venta**: exclusivamente mediante **contacto vía WhatsApp** con su padre (Juan Carlos, el productor).
+  - **Venta presencial en Jaén**: la recogida y entrega es presencial en la provincia de Jaén.
+  - **Formato por botellas (no limitado a cajas)**: al ser venta presencial y vía WhatsApp, desaparece la restricción de vender únicamente por cajas completas; se puede vender por **botellas individuales** o packs a convenir.
+  - **Futura ampliación (no incompatible)**: en el futuro se podrá activar venta online nacional con cajas cerradas (6/12), portes y Stripe. Ambas modalidades coexistirán sin problemas.
+
+- **Objetivo de la siguiente sesión (en nuevo chat)**:
+  1. Rediseñar la sección de venta (`src/sections/PurchaseSection.tsx`) y los CTAs de la web para presentar claramente la **venta presencial y encargo en Jaén vía WhatsApp por botellas**, transmitiendo exclusividad artesanal.
+  2. Configurar el teléfono real de WhatsApp en `src/config/site.ts`.
+  3. Dejar la web 100% funcional y verificada para su publicación final en internet y merge a `main`.

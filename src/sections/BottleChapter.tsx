@@ -60,14 +60,13 @@ export function BottleChapter() {
           <div className="annotations">
             <div className="annotation" data-active={is('intro')}>
               <p className="eyebrow">
-                Cosecha temprana · <b>Octubre 2026</b>
+                Edición limitada · <b>Cosecha 2026</b>
               </p>
               <h1 id="hero-title" className="display hero-title">
                 <span className="l">Aceite</span> <span className="l">Negro</span> <em className="l">Picudo</em>
               </h1>
               <p className="lede">
-                Aceite de oliva virgen extra de un solo lote: <strong>1.500 litros</strong> en{' '}
-                <strong>3.000 botellas</strong> de 500 ml.
+                Recogida temprana · Octubre 2026.
               </p>
             </div>
 
@@ -76,10 +75,10 @@ export function BottleChapter() {
                 <b>{angleAt('variedades')}</b> — Variedades
               </p>
               <p className="display annotation-big">
-                Picudo <em>y</em> Carrasqueño
+                Picudo 75% <em>y</em> Carrasqueño 25%
               </p>
               <p className="lede">
-                Las dos variedades del lote, recogidas juntas en octubre con la aceituna todavía verde.
+                Aceite de oliva virgen extra.
               </p>
             </div>
 
@@ -87,12 +86,13 @@ export function BottleChapter() {
               <p className="eyebrow">
                 <b>{angleAt('contraetiqueta')}</b> — Contraetiqueta
               </p>
-              <p className="display annotation-big mono-nums">
-                72 g <em>/ 100 g</em>
+              <p className="display annotation-big">
+                72 g de grasa <em>monoinsaturada</em>
               </p>
               <p className="lede">
-                de grasa monoinsaturada. <strong>{'Vitamina E: 20\u00a0mg'}</strong>
-                {' por cada 100\u00a0g (167\u00a0%\u00a0VRN).'}
+                Por cada 100&nbsp;g de aceite. Alto contenido natural en{' '}
+                <strong>{'Vitamina E: 20\u00a0mg'}</strong>
+                {' (167\u00a0%\u00a0VRN).'}
               </p>
               <a className="link-cta" href="#ficha">
                 Ficha completa <span className="arrow" aria-hidden="true">→</span>
@@ -103,7 +103,7 @@ export function BottleChapter() {
               <p className="eyebrow">
                 <b>{angleAt('formato')}</b> — Formato
               </p>
-              <p className="display annotation-big mono-nums">500 ml</p>
+              <p className="display annotation-big annotation-big--huge mono-nums">500 ml</p>
               <p className="lede">
                 {SALE_FORMATS.length > 0 ? (
                   <>

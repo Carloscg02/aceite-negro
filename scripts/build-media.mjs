@@ -148,12 +148,18 @@ function aceituna() {
   return kb(file);
 }
 
+function aceitunaPicuda() {
+  const file = join(out, 'aceituna-picuda.jpg');
+  copyFileSync(src('aceituna-picuda.jpg'), file);
+  return kb(file);
+}
+
 function logo() {
   run(['-i', src('foto-logo.jpeg'), '-vf', 'scale=480:-2', '-q:v', '3', join(out, 'logo.jpg')]);
   return 'logo.jpg';
 }
 
-const STEPS = { botella, aceite, aceituna, logo };
+const STEPS = { botella, aceite, aceituna, aceitunaPicuda, logo };
 const requested = process.argv.slice(2);
 mkdirSync(out, { recursive: true });
 for (const name of requested.length ? requested : Object.keys(STEPS)) {

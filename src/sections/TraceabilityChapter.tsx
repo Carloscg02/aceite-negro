@@ -2,90 +2,44 @@ import { useRef } from 'react';
 import { AmbientVideo } from '../components/AmbientVideo';
 import { Reveal } from '../components/Reveal';
 import { LABEL_DEFINITION } from '../config/label';
-import { parseLot, type Lot } from '../domain/lot';
 import { useViewportProgress } from '../hooks/useViewportProgress';
 import './TraceabilityChapter.css';
 
-interface Props {
-  lotCode: string;
-  /** Persona a la que corresponden las iniciales del lote. */
-  producer: string;
-}
-
-const two = (n: number) => String(n % 100).padStart(2, '0');
-
-function LotReading({ lot, producer }: { lot: Lot; producer: string }) {
-  const parts = [
-    { code: lot.initials, key: 'Productor', value: producer, initials: true },
-    { code: two(lot.day), key: 'Día', value: lot.weekday },
-    { code: two(lot.month), key: 'Mes', value: lot.monthName },
-    { code: two(lot.year), key: 'Año', value: String(lot.year) },
-  ];
-  return (
-    <dl className="lot" aria-label={`Lectura del lote ${lot.code}`}>
-      {parts.map((p) => (
-        <div key={p.key} className={p.initials ? 'lot-part lot-part--initials' : 'lot-part'}>
-          <dt className="lot-code mono">{p.code}</dt>
-          <dd className="lot-meaning">
-            <span className="eyebrow">{p.key}</span>
-            <span className="lot-value">{p.value}</span>
-          </dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
-export function TraceabilityChapter({ lotCode, producer }: Props) {
-  const lot = parseLot(lotCode);
+export function TraceabilityChapter() {
   const photoRef = useRef<HTMLDivElement | null>(null);
   useViewportProgress(photoRef);
 
   return (
-    <section id="trazabilidad" className="chapter trace" aria-labelledby="trazabilidad-title">
+    <section id="variedad" className="chapter trace" aria-labelledby="variedad-title">
+      <span id="trazabilidad" className="anchor-target" aria-hidden="true" />
       <div className="container trace-grid">
         <div className="trace-intro">
           <Reveal className="chapter-head">
             <p className="eyebrow">
-              <b>02</b> — Trazabilidad
+              <b>02</b> — Variedad
             </p>
-            <h2 id="trazabilidad-title" className="display">
-              El lote es <em>la fecha</em>.
+            <h2 id="variedad-title" className="display">
+              La aceituna <em>picuda</em>.
             </h2>
             <p className="lede">
-              Un solo lote y un solo código, impreso en todas las botellas.{' '}
-              {lot ? (
-                'Se lee así:'
-              ) : (
-                <>
-                  Lote <span className="mono">{lotCode}</span>.
-                </>
-              )}
+              Toma el nombre del pequeño pico curvado del fruto. Es la aceituna tradicional de nuestra zona: se recoge temprano, todavía verde, para conseguir un aceite fresco, aromático y con poco amargor.
             </p>
           </Reveal>
-
-          {lot && (
-            <Reveal className="trace-lot" delay={80}>
-              <LotReading lot={lot} producer={producer} />
-            </Reveal>
-          )}
         </div>
 
         <Reveal as="figure" className="trace-photo">
           <div ref={photoRef} className="trace-photo-frame">
             <img
-              src="/media/aceituna.jpg"
-              width={704}
-              height={704}
+              src="/media/aceituna-picuda.jpg"
+              width={1600}
+              height={988}
               loading="lazy"
-              alt="Montón de aceituna verde recién vareada, entre hojas de olivo, sobre el fardo"
+              alt="Aceituna picuda sobre el olivo durante la cosecha temprana"
             />
             <span className="grain" aria-hidden="true" />
           </div>
           <figcaption className="caption mono">
-            <span className="caption-n">Fig. 01</span>
-            <span className="caption-text">Aceituna recién vareada, sobre el fardo · Octubre 2026</span>
-            <span className="caption-tc">00:00.3</span>
+            <span className="caption-text">Aceituna picuda sobre el olivo · Cosecha temprana</span>
           </figcaption>
         </Reveal>
 
@@ -98,18 +52,16 @@ export function TraceabilityChapter({ lotCode, producer }: Props) {
             poster="/media/aceite-bucle-poster.jpg"
             width={480}
             height={480}
-            label="Chorro de aceite verde recién extraído cayendo en la cubeta de la almazara"
+            label="Nuestro aceite en la almazara"
           />
           <figcaption className="caption mono">
-            <span className="caption-n">Fig. 02</span>
-            <span className="caption-text">Aceite recién hecho, cayendo en la cubeta · 0,33× en bucle</span>
-            <span className="caption-tc">00:15.45—00:16.95</span>
+            <span className="caption-text">Nuestro aceite en la almazara</span>
           </figcaption>
         </Reveal>
 
         <Reveal as="blockquote" className="trace-quote" delay={140}>
+          <p className="trace-quote-tag">Una pequeña explotación familiar</p>
           <p className="display">«{LABEL_DEFINITION}»</p>
-          <footer className="eyebrow">Definición impresa en la etiqueta</footer>
         </Reveal>
       </div>
     </section>

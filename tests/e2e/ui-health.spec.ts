@@ -37,20 +37,20 @@ test.describe('Agent Eyes — UI Health & ScrollCraft (Puerto 5174)', () => {
 
     const snapshot = await page.locator('body').ariaSnapshot();
     expect(snapshot).toContain('heading "Aceite Negro Picudo" [level=1]');
-    expect(snapshot).toContain('heading "El lote es la fecha." [level=2]');
+    expect(snapshot).toContain('heading "La aceituna picuda." [level=2]');
     expect(snapshot).toContain('heading "Por cajas." [level=2]');
     expect(snapshot).toContain('Caja de 6');
     expect(snapshot).toContain('Caja de 12');
 
     await expect(page.locator('#botella h1')).toHaveCount(1);
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('#trazabilidad h2')).toHaveCount(1);
+    await expect(page.locator('#variedad h2')).toHaveCount(1);
     await expect(page.locator('#comprar > .container > header h2')).toHaveCount(1);
     await expect(page.locator('main h2')).toHaveCount(2);
 
     // Pies de figura documentales compuestos en mono (CA-5).
     const captionFonts = await page
-      .locator('#trazabilidad figcaption')
+      .locator('#variedad figcaption')
       .evaluateAll((els) => els.map((el) => getComputedStyle(el).fontFamily));
     expect(captionFonts).toHaveLength(2);
     for (const font of captionFonts) expect(font).toContain('IBM Plex Mono');
@@ -66,7 +66,7 @@ test.describe('Agent Eyes — UI Health & ScrollCraft (Puerto 5174)', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/', { waitUntil: 'networkidle' });
 
-    for (const id of ['botella', 'trazabilidad', 'comprar']) {
+    for (const id of ['botella', 'variedad', 'comprar']) {
       await page.evaluate((sectionId) => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'instant' });
       }, id);
@@ -128,7 +128,7 @@ test.describe('Agent Eyes — UI Health & ScrollCraft (Puerto 5174)', () => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/', { waitUntil: 'networkidle' });
 
-    const video = page.locator('#trazabilidad video');
+    const video = page.locator('#variedad video, #trazabilidad video');
     await video.scrollIntoViewIfNeeded();
     await expect
       .poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && v.currentTime > 0.3), { timeout: 10_000 })
@@ -170,7 +170,7 @@ test.describe('Agent Eyes — UI Health & ScrollCraft (Puerto 5174)', () => {
       .poll(() => front.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0))
       .toBe(true);
 
-    const video = page.locator('#trazabilidad video');
+    const video = page.locator('#variedad video, #trazabilidad video');
     await video.scrollIntoViewIfNeeded();
     await page.waitForTimeout(400);
     expect(await video.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);

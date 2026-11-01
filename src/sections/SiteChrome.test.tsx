@@ -11,7 +11,7 @@ describe('<SiteHeader>', () => {
   it('navega a los tres movimientos de la página', () => {
     render(<SiteHeader />);
     const nav = screen.getByRole('navigation', { name: /capítulos/i });
-    expect(within(nav).getByRole('link', { name: 'Trazabilidad' })).toHaveAttribute('href', '#trazabilidad');
+    expect(within(nav).getByRole('link', { name: 'Variedad' })).toHaveAttribute('href', '#variedad');
     expect(within(nav).getByRole('link', { name: 'Ficha' })).toHaveAttribute('href', '#ficha');
     expect(within(nav).getByRole('link', { name: 'Comprar' })).toHaveAttribute('href', '#comprar');
   });
