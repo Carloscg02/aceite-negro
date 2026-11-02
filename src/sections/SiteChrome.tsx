@@ -108,11 +108,11 @@ export function SiteFooter({ contact }: { contact: Contact }) {
         <div className="footer-grid">
           <img
             className="footer-logo"
-            src="/media/logo.jpg"
-            width={480}
-            height={542}
+            src="/media/logo-definitivo.jpg"
+            width={780}
+            height={949}
             loading="lazy"
-            alt="Logotipo de Aceite Negro Picudo: cosecha temprana octubre 2026, aceite de oliva virgen extra"
+            alt="Logotipo definitivo de Aceite Negro Picudo: cosecha temprana octubre 2026, aceite de oliva virgen extra"
           />
           <dl className="footer-legal">
             <div>

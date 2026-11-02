@@ -23,6 +23,7 @@
   --focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-oil);
 
   /* Tipografía */
+  --font-brand: 'Syne Variable', 'Syne', system-ui, sans-serif;
   --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
   --font-text: 'Sora Variable', 'Sora', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
@@ -52,7 +53,7 @@
   --page-max: 1320px;
   --header-h: 56px;
   --control-h: 48px;
-  --footer-logo-w: 220px;
+  --footer-logo-w: 250px;
 
   /* Movimiento */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);

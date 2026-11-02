@@ -26,6 +26,7 @@
 - `--focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-oil)`. Grano SVG al 6% sobre foto y vídeo.
 
 ## 3. Typography & Spacing
+- **Brand / Wordmark**: `Syne Variable` 600 (`--font-brand`), tracking 0.03em (utilizado en el wordmark de la barra de navegación superior).
 - **Display**: `Cormorant Garamond` 400/500 + itálica (eco de la serif de la etiqueta). Tracking −0.01em, interlineado 0.95–1.05.
 - **Texto/UI**: `Sora Variable` 300–500 (eco del logotipo geométrico). 16–18px, interlineado 1.6, medida 60ch.
 - **Datos**: `IBM Plex Mono` 400/500, `tabular-nums`; versalitas simuladas (`letter-spacing: 0.12em` + uppercase, 11–12px). El lote se compone en mono a `--step-3`.
