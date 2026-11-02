@@ -189,10 +189,10 @@ Si solo cambia el precio de un formato de `10 €` a `13 €`, React no repinta 
 ## 4. La Maquinaria de Construcción: Builders, Bundlers y Vite
 
 En el mundo backend estás acostumbrado a herramientas como:
-- **En Python**: Aunque Python sea interpretado, cuando necesitas distribuir o desplegar una aplicación usas herramientas como `poetry build` o `pip wheel` para generar un paquete empaquetado (`.whl`), o utilidades como **`PyInstaller`**, **`shiv`** o **`pex`**, que cogen tus scripts `.py`, el intérprete de Python y **todas las librerías de `site-packages` (virtualenv)** y las empaquetan en un único archivo ejecutable o archivo ZIP autocontenido para que pueda correr en otra máquina sin hacer `pip install`. Si despliegas con Docker, creas una imagen con tu `requirements.txt` preinstalado.
-- **En Go**: `go build` compila el código y enlaza estáticamente todas las librerías en un único binario independiente sin dependencias externas.
-- **En Java**: `javac` compila `.java` a bytecode `.class`, y Maven o Gradle empaquetan un "fat JAR" o "uber-JAR" (que incluye tu código más todas las dependencias `.jar` de terceros).
-- **En C/C++**: `gcc` / `clang` compilan los archivos fuente a código objeto y el enlazador (`ld`) une bibliotecas estáticas o dinámicas en un binario ejecutable ELF.
+- En Python: `poetry` / `setuptools` empaquetan módulos y dependencias en un `.whl` (o `PyInstaller` crea un ejecutable autocontenido).
+- En Go: `go build` compila y enlaza todo en un único ejecutable estático independiente.
+- En Java: `javac` compila `.java` a `.class`, y Maven/Gradle empaqueta un `.jar` o `.war`.
+- En C/C++: `gcc` / `clang` compilan y el enlazador (`ld`) une bibliotecas en un binario ELF.
 
 En frontend, **el concepto equivalente es el Bundler (Empaquetador)**.
 
