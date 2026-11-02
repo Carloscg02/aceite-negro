@@ -1,13 +1,14 @@
-# Handoff del Proyecto: `aceite-negro` (rama `main`)
+# Handoff del Proyecto: `aceite-negro` (v1 en producción)
 
-- **Dónde estamos (2026-11-01)**: Rama `main` — Primera versión funcional (v1) integrada y verificada.
-  - **Apertura**: `Recogida temprana · Octubre 2026`.
-  - **Botella 360°**: paradas ajustadas a `Picudo 75% y Carrasqueño 25%`, `72 g de grasa monoinsaturada` y `500 ml` (`Botella de cristal (13 €) o PET (10 €). Venta presencial en Jaén.`).
-  - **Capítulo 2 (`Variedad`)**: sección dedicada a **«La aceituna picuda»**, «El lote es la fecha» (`JCCC141026`) y bucle estabilizado del aceite (`Nuestro aceite en la almazara`).
-  - **Capítulo 3 (`Comprar`)**: formato editorial con botellas de 500 ml (**Cristal 13 €** / **PET 10 €**), botón destacado blanco en cabecera y botón principal con icono de WhatsApp (`+34 670 94 14 88`, solo mensajes) para reserva y entrega en mano en Jaén.
-  - **Ficha técnica / Etiqueta**: **100% validada** frente a la etiqueta física de Juan Carlos Cano Carrillo (`E23312572`, `40.044510/J`, lote `JCCC141026`).
-  - **Hoja de ruta para pagos online**: formalmente archivada en `docs/brain/decisions/0003-v1-direct-sales-whatsapp-and-future-gateway-roadmap.md` (capacidad latente en `domain/catalog.ts`).
+- **Dónde estamos (2026-11-02)**: **v1 cerrada y funcionando en internet** en `aceitenegropicudo.es` (Cloudflare Pages + DNS DonDominio).
+  - **Identidad & Botella 360°**: 4 paradas (`Picudo 75% / Carrasqueño 25%`, `72 g monoinsaturada`, `500 ml`), HUD depurado solo con Rotación y Formato.
+  - **Variedad & Trazabilidad**: «La aceituna picuda», lote descifrado (`JCCC141026`) y bucle estabilizado del aceite en almazara.
+  - **Canal de venta en Jaén**: botellas de 500 ml (**Cristal 13 €** / **PET 10 €**), botón blanco en cabecera y CTA WhatsApp (+34 670 94 14 88, solo mensajes) para reserva y entrega en mano en Jaén.
+  - **Ficha técnica / Etiqueta**: 100% validada frente a etiqueta física (`Juan Carlos Cano Carrillo`, `E23312572`, `40.044510/J`).
+  - **Hoja de ruta pasarela online**: formalmente archivada en `docs/brain/decisions/0003-v1-direct-sales-whatsapp-and-future-gateway-roadmap.md`.
   - **Salud del código**: 86 tests Vitest, ESLint, TypeScript, Vite build y 6 tests E2E Playwright en verde.
 
-- **Siguiente paso**:
-  - Desplegar `main` en Cloudflare Pages o configurar el dominio definitivo.
+- **Objetivo de la siguiente sesión**:
+  1. **Estrategia de ramas `develop` / `main`** (estilo Arrendis): `main` blindada como producción estable; todos los cambios se desarrollarán en `develop`.
+  2. **CI con GitHub Actions** (`.github/workflows/ci.yml`): automatizar en cada push/PR a `develop` y `main` las 4 barreras de calidad (lint/tsc, vitest, build y Playwright E2E).
+  3. Crear y publicar la rama `develop` para iniciar el nuevo ciclo de trabajo protegido.
