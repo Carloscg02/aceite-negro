@@ -66,11 +66,10 @@ export function BottleChapter() {
                   src="/media/logo-aceite-jaen.png"
                   alt="Sello oficial Indicación Geográfica Protegida Aceite de Jaén"
                   className="hero-seal-logo"
-                  width={633}
-                  height={565}
+                  width={1093}
+                  height={976}
                 />
                 <div className="hero-seal-caption">
-                  <span className="hero-seal-title">Indicación Geográfica Protegida</span>
                   <span className="hero-seal-sub">AOVE · Recogida temprana</span>
                 </div>
               </div>
