@@ -6,14 +6,15 @@
 
 ## 1. Identidad del Proyecto
 - **Nombre**: `aceite-negro`
-- **Objetivo**: Web D2C de marca para lote limitado de aceite de oliva (3.000 botellas 0.5L) con Stripe Payment Links y captacion multicanal/B2B
-- **Stack Tecnologico**: `typescript, react, vite, stripe-payment-links, cloudflare-pages`
-- **Dominio**: E-commerce D2C sin servidor, narrativa de marca gourmet, conversion web y distribucion multicanal por cupos
+- **Objetivo**: Web D2C de marca y venta de proximidad para lote de aceite de oliva Picudo y Carrasqueño (cosecha octubre 2026) con encargo directo por WhatsApp en Jaén.
+- **Stack Tecnologico**: `typescript, react, vite, cloudflare-pages` (con soporte latente para `stripe-payment-links` en `domain/catalog.ts`).
+- **Dominio y Producción**: `aceitenegropicudo.es` (DonDominio -> DNS en Cloudflare Free -> Cloudflare Pages en `main`).
+- **Dominio de Negocio**: E-commerce D2C sin servidor, narrativa editorial gourmet, conversión por WhatsApp y trazabilidad por lote.
 
 ---
 
 ## 2. Documentos Centrales (Nivel 2)
-- **[`architecture.md`](architecture.md)** - Diseno de capas, reglas de codigo y comandos de verificacion.
+- **[`architecture.md`](architecture.md)** - Diseño de capas, infraestructura de producción en Cloudflare, procedimientos de contingencia y comandos de verificación.
 - **[`handoff.md`](handoff.md)** - Estado del turno actual y siguiente paso inmediato (maximo 30 lineas).
 - **[`design.md`](design.md)** - Contrato UI «Almazara Nocturna» v2: recorrido en 3 movimientos, tokens, tipografia, regla de material documental, reglas Anti-Slop y estados obligatorios. Leer antes de tocar interfaz.
 - **[`decisions/index.md`](decisions/index.md)** - Sub-indice de decisiones tecnicas irreversibles (ADRs). Consultar solo ante decisiones arquitectonicas.

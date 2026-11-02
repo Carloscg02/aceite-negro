@@ -82,7 +82,7 @@ export function PurchaseSection({ formats, contact }: Props) {
           <p className="lede purchase-lede">
             Esta cosecha{' '}
             <strong className="purchase-highlight">
-              se vende de forma presencial en la provincia de Jaén
+              se vende de forma presencial en Jaén
             </strong>
             , por botellas sueltas o por cajas.{' '}
             <strong className="purchase-cta-note">Escríbenos por WhatsApp</strong> para reservar y acordar la
