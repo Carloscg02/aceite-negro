@@ -99,6 +99,10 @@ Si con HTML, CSS y JavaScript crudo ya se puede hacer una web, ¿por qué usamos
 > **Ningún navegador del mundo entiende TypeScript**. Ni Chrome, ni Safari, ni Firefox son capaces de ejecutar un archivo `.ts` o `.tsx`.
 > TypeScript existe **únicamente en tu entorno de desarrollo y compilación**. El compilador de TypeScript (`tsc`) analiza el código, valida que los tipos coincidan y **elimina todos los tipos**, emitiendo JavaScript puro estándar.
 
+> [!NOTE]
+> **Analogía directa con Python**: Si vienes de Python, esto es exactamente lo mismo que ocurre con los **Type Hints** (`def obtener_precio(item_id: str) -> int:`).
+> En tiempo de ejecución, el intérprete CPython **ignora por completo** las anotaciones de tipos. Necesitas una herramienta estática en desarrollo o en tu CI como **`mypy`** o **`pyright`** para analizar el código y alertarte de inconsistencias antes de desplegar. En el ecosistema web, **TypeScript (`tsc`) es el `mypy` del mundo JavaScript**: chequea los tipos en tu máquina, te garantiza que todo encaja y luego desaparece por completo al emitir el JavaScript final.
+
 En [`src/domain/catalog.ts`](file:///home/carlos/aceite-negro/src/domain/catalog.ts), por ejemplo, definimos:
 ```typescript
 export interface FormatItem {
@@ -185,9 +189,10 @@ Si solo cambia el precio de un formato de `10 €` a `13 €`, React no repinta 
 ## 4. La Maquinaria de Construcción: Builders, Bundlers y Vite
 
 En el mundo backend estás acostumbrado a herramientas como:
-- En C/C++: `gcc` / `clang` compilan y el enlazador (`ld`) une bibliotecas en un binario ELF.
-- En Java: `javac` compila `.java` a `.class`, y Maven/Gradle empaqueta un `.jar` o `.war`.
-- En Go: `go build` compila y enlaza todo en un único ejecutable estático independiente.
+- **En Python**: Aunque Python sea interpretado, cuando necesitas distribuir o desplegar una aplicación usas herramientas como `poetry build` o `pip wheel` para generar un paquete empaquetado (`.whl`), o utilidades como **`PyInstaller`**, **`shiv`** o **`pex`**, que cogen tus scripts `.py`, el intérprete de Python y **todas las librerías de `site-packages` (virtualenv)** y las empaquetan en un único archivo ejecutable o archivo ZIP autocontenido para que pueda correr en otra máquina sin hacer `pip install`. Si despliegas con Docker, creas una imagen con tu `requirements.txt` preinstalado.
+- **En Go**: `go build` compila el código y enlaza estáticamente todas las librerías en un único binario independiente sin dependencias externas.
+- **En Java**: `javac` compila `.java` a bytecode `.class`, y Maven o Gradle empaquetan un "fat JAR" o "uber-JAR" (que incluye tu código más todas las dependencias `.jar` de terceros).
+- **En C/C++**: `gcc` / `clang` compilan los archivos fuente a código objeto y el enlazador (`ld`) une bibliotecas estáticas o dinámicas en un binario ejecutable ELF.
 
 En frontend, **el concepto equivalente es el Bundler (Empaquetador)**.
 
@@ -366,7 +371,7 @@ Para fijar los conceptos, aquí tienes la tabla de equivalencias directas:
 | **Herramienta de tipos** | Compilador nativo (`go`, `javac`, `mypy`). | TypeScript (`tsc`), que solo chequea y luego desaparece. |
 | **Estructura de datos viva** | Objetos en memoria del proceso, tablas DB. | El árbol **DOM** (nodos C++ gestionados por el browser). |
 | **Framework de renderizado** | Jinja, Thymeleaf, Blade, Django Templates. | **React 19** (componentes declarativos basados en estado). |
-| **Compilador / Bundler** | GCC, Go Build, Maven, Webpack. | **Vite** (esbuild en desarrollo + Rollup en producción). |
+| **Compilador / Bundler** | PyInstaller, shiv, Poetry build, Go Build, Maven, GCC. | **Vite** (esbuild en desarrollo + Rollup en producción). |
 | **Artefacto final compilado** | Un binario `.exe`/ELF, un archivo `.jar` o imagen Docker. | La carpeta estática `dist/` (`.html`, `.js`, `.css`). |
 | **Servidor web** | Nginx haciendo proxy hacia un puerto `:3000`. | **Cloudflare Edge CDN** sirviendo archivos estáticos por Anycast. |
 | **Coste por millón de visitas** | Escalar CPUs, memoria RAM y réplicas de bases de datos. | **0 €**. Cloudflare Pages sirve ficheros cacheados sin coste de cómputo. |
