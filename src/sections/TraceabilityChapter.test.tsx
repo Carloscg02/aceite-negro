@@ -36,7 +36,7 @@ describe('<TraceabilityChapter>', () => {
 
   it('destaca la explotación familiar y cita la definición de la etiqueta', () => {
     render(<TraceabilityChapter />);
-    expect(screen.getByText('Una pequeña explotación familiar')).toBeInTheDocument();
-    expect(screen.getByText(/solo mediante procedimientos mecánicos/)).toBeInTheDocument();
+    expect(screen.getByText('Una pequeña explotación familiar con una pequeña cosecha')).toBeInTheDocument();
+    expect(screen.getByText(/mediante procedimientos mecánicos en frío/)).toBeInTheDocument();
   });
 });

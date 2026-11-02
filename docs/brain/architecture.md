@@ -4,7 +4,7 @@
 Arquitectura en Capas (Layered Architecture — Frontend D2C Zero-Backend):
 - **Capa de Presentacion (`src/components/`, `src/sections/`)**: Interfaz visual de marca, narrativa editorial y animaciones en React + TypeScript + Vite. Consume exclusivamente tokens semanticos de `docs/brain/design.md` y respeta `prefers-reduced-motion`.
 - **Capa de Dominio de Catalogo y Conversion (`src/domain/`)**: Logica pura y tipada de formatos de venta (botellas de 500 ml cristal / PET, litros, calculo de precios y estados de compra). Sin dependencias de DOM para testeo rapido.
-- **Capa de Configuracion y Enlaces Externos (`src/config/`)**: Enlace directo a WhatsApp del productor (`+34 670 94 14 88`), formatos públicos y soporte latente para Stripe Payment Links (`VITE_STRIPE_LINK_*`).
+- **Capa de Configuracion y Enlaces Externos (`src/config/`)**: Enlace directo a WhatsApp del productor (`+34 689 09 11 31`), formatos públicos y soporte latente para Stripe Payment Links (`VITE_STRIPE_LINK_*`).
 - **Infraestructura de Despliegue**: Alojamiento estatico 100% gratuito en **Cloudflare Pages** (CDN global + SSL automatico). Ver [ADR 0001](decisions/0001-initial-architecture.md) y [ADR 0003](decisions/0003-v1-direct-sales-whatsapp-and-future-gateway-roadmap.md) para la hoja de ruta opcional con pasarela de cobro o micro-backend.
 
 ---

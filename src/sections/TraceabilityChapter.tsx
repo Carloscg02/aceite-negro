@@ -22,7 +22,7 @@ export function TraceabilityChapter() {
               La aceituna <em>picuda</em>.
             </h2>
             <p className="lede">
-              Toma el nombre del pequeño pico curvado del fruto. Es la aceituna tradicional de nuestra zona: se recoge temprano, todavía verde, para conseguir un aceite fresco, aromático y con poco amargor.
+              Toma el nombre del pequeño pico curvado del fruto. Es una aceituna procedente de la sierra sur de Jaén. De cosecha temprana, todavía verde, para conseguir un aceite fresco, aromático y con un amargor controlado.
             </p>
           </Reveal>
         </div>
@@ -43,7 +43,12 @@ export function TraceabilityChapter() {
           </figcaption>
         </Reveal>
 
-        <Reveal as="figure" className="trace-oil" delay={80}>
+        <Reveal as="blockquote" className="trace-quote" delay={80}>
+          <p className="trace-quote-tag">Una pequeña explotación familiar con una pequeña cosecha</p>
+          <p className="display">«{LABEL_DEFINITION}»</p>
+        </Reveal>
+
+        <Reveal as="figure" className="trace-oil" delay={140}>
           <AmbientVideo
             sources={[
               { src: '/media/aceite-bucle.webm', type: 'video/webm' },
@@ -57,11 +62,6 @@ export function TraceabilityChapter() {
           <figcaption className="caption mono">
             <span className="caption-text">Nuestro aceite en la almazara</span>
           </figcaption>
-        </Reveal>
-
-        <Reveal as="blockquote" className="trace-quote" delay={140}>
-          <p className="trace-quote-tag">Una pequeña explotación familiar</p>
-          <p className="display">«{LABEL_DEFINITION}»</p>
         </Reveal>
       </div>
     </section>

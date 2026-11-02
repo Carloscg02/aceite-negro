@@ -85,12 +85,55 @@
 }
 
 .hero-title {
-  font-size: var(--step-4);
+  font-size: clamp(3.3rem, 10.2vw, 8.85rem);
   line-height: 0.92;
 }
 
 .hero-title .l {
   display: block;
+}
+
+.hero-seal-block {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
+}
+
+.hero-seal-logo {
+  height: clamp(56px, 5.8vw, 70px);
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: saturate(0.9) brightness(0.95);
+  transition: filter var(--dur-fast) var(--ease);
+}
+
+.hero-seal-logo:hover {
+  filter: none;
+}
+
+.hero-seal-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.25;
+}
+
+.hero-seal-title {
+  font-family: var(--font-text);
+  font-size: clamp(0.875rem, 1.1vw, 0.95rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-seal-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 0.8vw, 0.75rem);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
 }
 
 .annotation-big {

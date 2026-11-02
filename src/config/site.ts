@@ -27,5 +27,5 @@ export const SALE_FORMATS: SaleFormat[] = [
 ];
 
 export const CONTACT = {
-  whatsapp: '+34 670 94 14 88',
+  whatsapp: '+34 689 09 11 31',
 };

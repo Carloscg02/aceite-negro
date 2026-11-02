@@ -56,14 +56,24 @@ export function BottleChapter() {
           <div className="annotations">
             <div className="annotation" data-active={is('intro')}>
               <p className="eyebrow">
-                Edición limitada · <b>Cosecha 2026</b>
+                Edición limitada · <b>Octubre 2026</b>
               </p>
               <h1 id="hero-title" className="display hero-title">
                 <span className="l">Aceite</span> <span className="l">Negro</span> <em className="l">Picudo</em>
               </h1>
-              <p className="lede">
-                Recogida temprana · Octubre 2026.
-              </p>
+              <div className="hero-seal-block">
+                <img
+                  src="/media/logo-aceite-jaen.png"
+                  alt="Sello oficial Indicación Geográfica Protegida Aceite de Jaén"
+                  className="hero-seal-logo"
+                  width={633}
+                  height={565}
+                />
+                <div className="hero-seal-caption">
+                  <span className="hero-seal-title">Indicación Geográfica Protegida</span>
+                  <span className="hero-seal-sub">AOVE · Recogida temprana</span>
+                </div>
+              </div>
             </div>
 
             <div className="annotation" data-active={is('variedades')}>

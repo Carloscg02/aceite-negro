@@ -3,7 +3,7 @@
 ## 1. Aesthetic Direction
 - **Arquetipo**: `warm-editorial` invertido a nocturno. Base = negro del logo y la etiqueta; acentos = oliva del ramo y hueso del logotipo. Elegancia por contención, no por ornamento.
 - **Tesis**: la alta gama la ponen la tipografía, el aire y la botella 360°; la verdad casera la ponen los **datos reales de la etiqueta** (el lote descifrado, RGSEAA, tabla nutricional) y el **material de móvil tratado como documento pequeño**. Cero eslóganes sentimentales.
-- **Recorrido en 3 movimientos**: (1) botella 360° con 4 paradas anotadas (frente · canto · contraetiqueta · frente) → (2) Variedad/Trazabilidad: «La aceituna picuda» + «El lote es la fecha» + bucle estabilizado del aceite → (3) Compra presencial en Jaén por botellas (cristal 13 € / PET 10 €) vía WhatsApp. La ficha completa vive plegada en el pie.
+- **Recorrido en 3 movimientos**: (1) botella 360° con 4 paradas anotadas (frente: antetítulo de cosecha, H1 y «AOVE de Jaén · Pequeña cosecha» con Jaén en `--accent-oil` · canto · contraetiqueta · formato) → (2) Variedad/Trazabilidad: «La aceituna picuda» + «El lote es la fecha» + bucle estabilizado del aceite → (3) Compra presencial en Jaén por botellas (cristal 13 € / PET 10 €) vía WhatsApp. La ficha completa vive plegada en el pie.
 - **Signature move**: la botella gira con el scroll dentro de un «foco de estudio» (`--light-pool`) que se disuelve en el negro y **se detiene** en cada parada; el numeral de cada anotación es el ángulo real que marca el HUD.
 - **Regla de disolución**: nada va en marco. Botella, foto y vídeo emergen del negro (`multiply`, máscaras con `--feather` / `--lens-solid`).
 - **Ornamento único**: doble filete fino oliva (eco de las líneas de «ACEITE DE OLIVA VIRGEN EXTRA»).

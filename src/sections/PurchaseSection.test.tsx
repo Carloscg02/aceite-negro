@@ -3,7 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import { PurchaseSection } from './PurchaseSection';
 import type { SaleFormat } from '../domain/catalog';
 
-const CONTACT = { whatsapp: '+34 670 94 14 88' };
+const CONTACT = { whatsapp: '+34 689 09 11 31' };
 
 const cristal = (over: Partial<SaleFormat> = {}): SaleFormat => ({
   id: 'botella-cristal',
@@ -47,16 +47,16 @@ describe('<PurchaseSection>', () => {
     expect(second.getByText('10 €')).toBeInTheDocument();
   });
 
-  it('incluye botón con logo SVG de WhatsApp hacia +34 670 94 14 88 y aviso explícito de no llamadas ni correo', () => {
+  it('incluye botón con logo SVG de WhatsApp hacia +34 689 09 11 31 y aviso explícito de no llamadas ni correo', () => {
     render(<PurchaseSection formats={[cristal(), pet()]} contact={CONTACT} />);
 
     const cta = screen.getByRole('link', { name: /encargar por whatsapp/i });
-    expect(cta.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/34670941488\?text=/);
+    expect(cta.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/34689091131\?text=/);
     expect(cta).toHaveAttribute('target', '_blank');
     expect(cta).toHaveAttribute('rel', 'noopener noreferrer');
     expect(cta.querySelector('svg')).not.toBeNull();
 
-    expect(screen.getByText(/\+34 670 94 14 88/)).toBeInTheDocument();
+    expect(screen.getByText(/\+34 689 09 11 31/)).toBeInTheDocument();
     expect(screen.getByText(/únicamente por mensaje de whatsapp./i)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /correo|email/i })).not.toBeInTheDocument();
   });

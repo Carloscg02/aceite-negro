@@ -3,7 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SiteFooter, SiteHeader } from './SiteChrome';
 
-const CONTACT = { whatsapp: '+34 670 94 14 88' };
+const CONTACT = { whatsapp: '+34 689 09 11 31' };
 
 const fichaOf = () => screen.getByText(/ficha completa/i).closest('details');
 
@@ -28,8 +28,8 @@ describe('<SiteFooter>', () => {
     expect(visible('JCCC141026')).toHaveLength(1);
     expect(visible('Juan Carlos Cano Carrillo y otro C.B')).toHaveLength(1);
     expect(visible('E23312572')).toHaveLength(1);
-    const waLink = within(footer).getByRole('link', { name: /\+34 670 94 14 88/i });
-    expect(waLink).toHaveAttribute('href', expect.stringMatching(/^https:\/\/wa\.me\/34670941488\?text=/));
+    const waLink = within(footer).getByRole('link', { name: /\+34 689 09 11 31/i });
+    expect(waLink).toHaveAttribute('href', expect.stringMatching(/^https:\/\/wa\.me\/34689091131\?text=/));
     expect(waLink).toHaveAttribute('target', '_blank');
     expect(waLink).toHaveAttribute('rel', 'noopener noreferrer');
     expect(within(footer).getByText(/no se atienden llamadas/i)).toBeInTheDocument();

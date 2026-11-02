@@ -11,7 +11,7 @@ export const PRODUCER = {
 } as const;
 
 export const LABEL_DEFINITION =
-  'Aceite de oliva de categoría superior obtenido directamente de aceitunas y solo mediante procedimientos mecánicos.';
+  'Aceite de oliva virgen extra de categoría superior obtenido directamente mediante procedimientos mecánicos en frío.';
 
 export const LABEL_ROWS = [
   ['Denominación', 'Aceite de oliva virgen extra'],
