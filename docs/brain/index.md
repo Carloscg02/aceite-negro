@@ -24,3 +24,10 @@
 ## 3. Modulos del Sistema (`modules/`)
 Registro de fichas tecnicas de cada modulo implementado en el proyecto.
 - **[`modules/landing-scrollcraft.md`](modules/landing-scrollcraft.md)** - Landing «Almazara Nocturna» v2 (specs 001 → 002): botella 360° con paradas anotadas, trazabilidad (lote descifrado + foto de aceituna + bucle estabilizado del aceite), compra por cajas (Stripe / WhatsApp) y ficha plegada en el pie.
+
+---
+
+## 4. Guias Didacticas (`guides/`)
+Guias tecnicas y pedagogicas generadas con la skill `mentor-guide`:
+- **[`guides/001-landing-scrollcraft-GUIDE.md`](../../guides/001-landing-scrollcraft-GUIDE.md)** - Landing ScrollCraft «Almazara Nocturna»: sincronización de scroll, bisección binaria y shader de mezcla óptica.
+- **[`guides/002-frontend-under-the-hood-para-desarrolladores-backend-GUIDE.md`](../../guides/002-frontend-under-the-hood-para-desarrolladores-backend-GUIDE.md)** - El Frontend por dentro para desarrolladores backend: DOM, React, Vite, Bundlers y despliegue Edge en Cloudflare Pages.

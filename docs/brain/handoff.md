@@ -6,6 +6,7 @@
   - **Canal de venta en Jaén**: botellas de 500 ml (**Cristal 13 €** / **PET 10 €**), botón blanco en cabecera y CTA WhatsApp (+34 670 94 14 88, solo mensajes) para reserva y entrega en mano en Jaén.
   - **Ficha técnica / Etiqueta**: 100% validada frente a etiqueta física (`Juan Carlos Cano Carrillo`, `E23312572`, `40.044510/J`).
   - **Hoja de ruta pasarela online**: formalmente archivada en `docs/brain/decisions/0003-v1-direct-sales-whatsapp-and-future-gateway-roadmap.md`.
+  - **Guías técnicas**: `guides/001-landing-scrollcraft-GUIDE.md` y `guides/002-frontend-under-the-hood-para-desarrolladores-backend-GUIDE.md` (frontend explicada para ingenieros backend).
   - **Salud del código**: 86 tests Vitest, ESLint, TypeScript, Vite build y 6 tests E2E Playwright en verde.
 
 - **Objetivo de la siguiente sesión**:
