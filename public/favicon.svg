@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Hoja de olivo en verde salvia (#8A9157) -->
+  <path d="M22 11 C28 5, 38 6, 41 8 C40 14, 31 18, 24 13 Z" fill="#8A9157"/>
+  <!-- Cuerpo de aceituna picuda con pico curvado en verde aceite (#BCC46A) -->
+  <path d="M24 12
+           C35 12, 40 21, 38 31
+           C36 39, 28 44, 20 44
+           C15.5 44, 12.5 41.5, 11.5 38
+           C14 37.5, 16.5 36.5, 17 34
+           C11 31, 11 21, 15.5 16
+           C18 13.5, 21 12, 24 12 Z"
+        fill="#BCC46A"/>
+  <!-- Brillo / reflejo en blanco hueso (#EDEBE3) -->
+  <circle cx="21" cy="20" r="2.8" fill="#EDEBE3" opacity="0.9"/>
+</svg>
